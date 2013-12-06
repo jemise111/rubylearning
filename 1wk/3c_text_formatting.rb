@@ -4,20 +4,26 @@
 
 def multiplication_table(n, heading = '', decorate = false)
   table = ''
-  n.times do |row|
-    row += 1                # since index starts at 0
-    n.times do |column|
-      column += 1
-      width = (column * n).to_s.size
-      table << sprintf(' %*s', width, row * column)
+  # special case when n = 0
+  if n == 0
+    n += 1
+    table << " 0\n"
+  else
+    n.times do |row|
+      row += 1                # since index starts at 0
+      n.times do |column|
+        column += 1
+        width = (column * n).to_s.size
+        table << sprintf(' %*s', width, row * column)
+      end
+      table << "\n"
     end
-    table << "\n"
   end
   if decorate
     table.prepend('=' * get_width(n) + "=\n")
     table << '=' * get_width(n) + '='
   end
-  table.prepend(heading.center(get_width(n)) + "\n")
+  table.prepend(heading.center(get_width(n) + 1) + "\n")   # add 1 to width for trailing "="   
   table
 end
 
@@ -32,8 +38,8 @@ end
 
 table1 = multiplication_table(9, 'Times Table to 9', true)
 table2 = multiplication_table(20)
-table3 = multiplication_table(0)
-table4 = multiplication_table(1)
+table3 = multiplication_table(1, 'm', true)
+table4 = multiplication_table(0)
 
 puts table1
 puts
