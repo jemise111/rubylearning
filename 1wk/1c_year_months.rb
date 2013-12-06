@@ -1,17 +1,20 @@
 # c1_year_months.rb
 # Challenge: convert age in seconds to age in years and months
 
-def age_in_yrs_mos age_in_seconds
+# doctest: return year and month as elements of an array
+# >> years_months 24 * 60 * 60 * 31
+# => [0, 1]
+def years_months seconds
   secs_in_a_day = 60 * 60 * 24
-  yrs = age_in_seconds / secs_in_a_day / 365
-  days = age_in_seconds / secs_in_a_day % 365
-  month = choose_mo_from_days(days)
-  puts "I'm #{yrs} years and #{month} month(s) old."
+  years = seconds / secs_in_a_day / 365
+  days = seconds / secs_in_a_day % 365
+  months = choose_months(days)
+  [years, months]
 end
 
-def choose_mo_from_days days
+def choose_months days
   #assuming non leap year
-  case days + 1   # since indexed at 0
+  case days.next  # since indexed at 0
   when 1..31
     0
   when 32..59
@@ -39,11 +42,14 @@ def choose_mo_from_days days
   end
 end
 
-age_in_yrs_mos(979000000)
-age_in_yrs_mos(2158493738)
-age_in_yrs_mos(246144023)
-age_in_yrs_mos(1270166272)
-age_in_yrs_mos(1025600095)
-
-
+begin
+  result = [ 979000000, 2158493738,
+    246144023, 1270166272,
+    1025600095,
+  ].map do |seconds|
+    format('If you are %d seconds old, then are %d years and %d months',
+           seconds, *years_months(seconds) )
+  end
+  puts result
+end if __FILE__ == $PROGRAM_NAME
 

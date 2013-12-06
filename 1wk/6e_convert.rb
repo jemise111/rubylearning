@@ -11,12 +11,13 @@
 #    >> convert(98.6)
 #    => 37
 
-  def fahrenheit_to_celsius(temp_in_fahrenheit)
-    # remove extra parenthesis.
-    (temp_in_fahrenheit - 32) / 9 * 5
-  end
+def fahrenheit_to_celsius(temp_in_fahrenheit)
+  # remove extra parenthesis.
+  (temp_in_fahrenheit - 32) * 5 / 9
+end
 
 alias convert fahrenheit_to_celsius
 
-f_temp = 212
-puts "#{f_temp} is equivalent to #{convert(f_temp).round(2)} degrees celsius"
+[-40, 0, 32, 98, 98.6, 100, 212].each do |f|
+  puts "#{f} is equivalent to #{convert(f)} degrees celsius"
+end
