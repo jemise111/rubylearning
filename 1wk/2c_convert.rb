@@ -109,11 +109,11 @@ if __FILE__ == $PROGRAM_NAME
   puts 'Your choices are Fahrenheit, Celsius, Kelvin.'
   puts
   print '?: '
-  input = gets.chomp.downcase.split
+  input     = gets.chomp.downcase.split
   unit_from = input[0]
-  unit_to = input[1]
-  temp = input[2]
-  valid = [unit_from, unit_to].all? {|u| valid_unit?(u) }
+  unit_to   = input[1]
+  temp      = input[2]
+  valid     = [unit_from, unit_to].all? {|u| valid?(u) }
 
   if valid
     puts "%.2f degrees #{unit_from.capitalize} is %.2f degrees #{unit_to.capitalize}" % [temp.to_f,convert(unit_from, unit_to, temp.to_f)]
