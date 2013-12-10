@@ -3,6 +3,15 @@
 # guidelines given
 
 def multiplication_table(n, heading = '', decorate = false)
+  prepare_result_string
+  check_for_0_special_case
+  build_the_table
+  decoration if decorate
+  heading
+  result
+end
+
+def result
   table = ''
   # special case when n = 0
   if n == 0
