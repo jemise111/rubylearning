@@ -9,22 +9,22 @@ doctest: Entering a temperature below absolute zero displays error message
 =end
 def convert unit_from, unit_to, temp
   if is_too_low?(unit_from, temp)
-    puts "That's below absolute zero. Try something a little warmer next time."
+    # puts "That's below absolute zero. Try something a little warmer next time."
     fail ArgumentError, "That's below Absolute Zero"
   else
     case unit_from
-    when 'fahrenheit'
+    when 'fahrenheit', 'f'
       result = fahrenheit_to_celsius(temp)
       if unit_to == 'kelvin'
         result = celsius_to_kelvin(result)
       end
-    when 'celsius'
+    when 'celsius', 'c'
       if unit_to == 'fahrenheit'
         result = celsius_to_fahrenheit(temp)
       else
         result = celsius_to_kelvin(temp)
       end
-    when 'kelvin'
+    when 'kelvin', 'k'
       result = temp - 273
       if unit_to == 'fahrenheit'
         result = celsius_to_fahrenheit(result)

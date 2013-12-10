@@ -1,9 +1,9 @@
 # c1_year_months.rb
 # Challenge: convert age in seconds to age in years and months
 
-# doctest: return year and month as elements of an array
-# >> years_months 24 * 60 * 60 * 31
-# => [0, 1]
+#    doctest: return year and month as elements of an array
+#    >> years_months 24 * 60 * 60 * 32
+#    => [0, 1]
 def years_months seconds
   secs_in_a_day = 60 * 60 * 24
   years = seconds / secs_in_a_day / 365
@@ -12,34 +12,36 @@ def years_months seconds
   [years, months]
 end
 
+#    doctest: choose_months
+#    >> choose_months 15
+#    => 0
+#    >> choose_months 45
+#    => 1
+#    >> choose_months 75
+#    => 2
+#    >> choose_months 300
+#    => 9
+#    >> choose_months 365
+#    => 11
+#    >> choose_months(366).nil?
+#    => true
+# Supply the number of days, and you will get the number of months that days
+# amount to or for less than 1 day or more than 1 year, you will get nil
 def choose_months days
-  #assuming non leap year
-  case days.next  # since indexed at 0
-  when 1..31
-    0
-  when 32..59
-    1
-  when 60..90
-    2
-  when 91..120
-    3
-  when 121..151
-    4
-  when 152..181
-    5
-  when 182..212
-    6
-  when 213..243
-    7
-  when 244..273
-    8
-  when 274..304
-    9
-  when 305..334
-    10
-  when 335..365
-    11
-  end
+  {
+     (1..31)    =>  0,
+     (32..59)   =>  1,
+     (60..90)   =>  2,
+     (91..120)  =>  3,
+     (121..151) =>  4,
+     (152..181) =>  5,
+     (182..212) =>  6,
+     (213..243) =>  7,
+     (244..273) =>  8,
+     (274..304) =>  9,
+    (305..334)  => 10,
+    (335..365)  => 11,
+  }.select {|d, m| d.include?(days) }.values[0]
 end
 
 begin
