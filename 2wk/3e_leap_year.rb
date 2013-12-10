@@ -7,7 +7,7 @@ doctest: return true if a year is a leap year
 >> [-400, -1896, -2000, 400, 1896, 2000].map { |y| leap_year?(y) }.all?
 => true
 doctest: return false if a year is not a leap year
->> [-300, -1900, -2001, 0, 300, 1900, 2001].map { |y| leap_year?(y) }.all?
+>> [-300, -1900, -2001, 300, 1900, 2001].map { |y| leap_year?(y) }.all?
 => false
 doctest: return error string if a year isn't valid
 >> [0, 'cat'.to_i].map { |y| leap_year?(y) }.all?
