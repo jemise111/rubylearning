@@ -36,16 +36,12 @@ def get_width(n)      # returns width of the last (and largest) row
   width
 end
 
-table1 = multiplication_table(9, 'Times Table to 9', true)
-table2 = multiplication_table(20)
-table3 = multiplication_table(1, 'm', true)
-table4 = multiplication_table(0)
-
-puts table1
-puts
-puts table2
-puts
-puts table3
-puts
-puts table4
-
+[
+  multiplication_table(9, 'Times Table to 9', true),
+  multiplication_table(20),
+  multiplication_table(1, 'm', true),
+  multiplication_table(0),
+].each do |result|
+  puts result
+  puts
+end
