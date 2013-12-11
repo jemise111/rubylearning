@@ -1,104 +1,102 @@
 # c2_convert.rb
 # Challenge: write code that asks for user input, then changes input from one
 # temperature unit to another based on user's wishes
+
 =begin
-doctest: Entering a temperature below absolute zero displays error message
->> my_error = -> {convert('kelvin', 'celsius', -1)}
->> begin ; my_error.call ; rescue ArgumentError => e ; e.class ; end
-=> ArgumentError
+    doctest: Entering a temperature below absolute zero displays error message
+    >> my_error = -> {convert('kelvin', 'celsius', -1)}
+    >> begin ; my_error.call ; rescue ArgumentError => e ; e.class ; end
+    => ArgumentError
+    doctest: Entering a temperature above absolute zero returns its converted temperature
+    >> convert('f', 'c', 212)
+    => 100
 =end
 def convert unit_from, unit_to, temp
-  if is_too_low?(unit_from, temp)
-    # puts "That's below absolute zero. Try something a little warmer next time."
+  result = to_kelvin(unit_from, temp)
+  if too_low?(result)
     fail ArgumentError, "That's below Absolute Zero"
   else
-    case unit_from
-    when 'fahrenheit', 'f'
-      result = fahrenheit_to_celsius(temp)
-      if unit_to == 'kelvin'
-        result = celsius_to_kelvin(result)
-      end
-    when 'celsius', 'c'
-      if unit_to == 'fahrenheit'
-        result = celsius_to_fahrenheit(temp)
-      else
-        result = celsius_to_kelvin(temp)
-      end
-    when 'kelvin', 'k'
-      result = temp - 273
-      if unit_to == 'fahrenheit'
-        result = celsius_to_fahrenheit(result)
-      end
-    end
-    result
+    from_kelvin(unit_to, result)
   end
 end
 
 =begin
-doctest: valid units return true
->> valid? 'celsius'
-=> true
->> valid? 'kelvin'
-=> true
->> valid? 'fahrenheit'
-=> true
+    doctest: returns a temperature in kelvin from fahrneheit 
+    >> [
+        [-40, 233.15],
+        [32, 273.15],
+        [212, 373.15],
+        ].map {|q, a| to_kelvin('fahrenheit', q).round(2) == a}.all?
+    => true
+    doctest: returns a temperature in kelvin from celsius
+    >> [
+        [-40, 233.15],
+        [100, 373.15],
+        [50, 323.15],
+        ].map {|q, a| to_kelvin('celsius', q).round(2) == a}.all?
+    => true
+=end
+def to_kelvin unit, temp
+  case unit
+  when 'fahrenheit', 'f'
+    (temp - 32.0) * 5 / 9 + 273.15
+  when 'celsius', 'c'
+    temp + 273.15
+  else
+    temp
+  end
+end
+
+=begin
+    doctest: returns a temperature in fahrenheit from kelvin 
+    >> [
+        [50, -369.67],
+        [21, -421.87],
+        [273.15, 32]
+        ].map {|q, a| from_kelvin('fahrenheit', q).round(2) == a}.all?
+    => true
+    doctest: returns a temperature in celsius from kelvin
+    >> [
+        [273.15, 0],
+        [250, -23.15],
+        [373.15, 100],
+        ].map {|q, a| from_kelvin('celsius', q).round(2) == a}.all?
+    => true
+=end
+def from_kelvin unit, temp
+  case unit
+  when 'fahrenheit', 'f'
+    (temp - 273.15) * 9 / 5 + 32
+  when 'celsius', 'c'
+    temp - 273.15
+  else
+    temp
+  end
+end
+
+=begin
+    doctest: valid units return true
+    >> ['fahrenheit',
+        'celsius',
+        'kelvin',
+        'f', 'c', 'k'
+        ].map { |t| valid?(t)}.all?
+    => true
 =end
 def valid?(unit)
- %w[fahrenheit celsius kelvin].include?(unit)
-end
-
-# individual conversion helper methods
-def fahrenheit_to_celsius temp_in_f
-  (temp_in_f - 32.0) * 5 / 9
+ %w[fahrenheit celsius kelvin f c k].include?(unit)
 end
 
 =begin
->> [
-    [-40, -40],
-    [100, 212],
-    [0, 32],
-    [37, 98.6]
-    ].map {|q, a| celsius_to_fahrenheit(q) == a}.all?
-Put any comments in here that you want.  Including saying "Pay attention to
-indentation for your tests, when you feel you need to break them into lines."
-=> true
+    doctest: When the temperature in K is less than 0 it is too low
+    >> too_low?(0)
+    => false
+    >> too_low?(-0.00001)
+    => true
 =end
-def celsius_to_fahrenheit temp_in_c
-  temp_in_c.to_f * 9 / 5 + 32
+def too_low? temp    # check if temp is below absolute zero
+  temp < 0
 end
-
-def celsius_to_kelvin temp_in_c
-  temp_in_c + 273.15
-end
-
-=begin
-doctest: When the temperature in F is less than -459 it is too low
->> is_too_low?('fahrenheit', -459)
-=> false
->> is_too_low?('fahrenheit', -459.0001)
-=> true
-doctest: When the temperature in C is less than -273 it is too low
->> is_too_low?('celsius', -273)
-=> false
->> is_too_low?('celsius', -273.0001)
-=> true
-doctest: When the temperature in k is less than 0 it is too low
->> is_too_low?('kelvin', 0)
-=> false
->> is_too_low?('kelvin', -0.0001)
-=> true
-=end
-def is_too_low? unit, temp    # check if temp is below absolute zero
-  case unit
-  when 'fahrenheit'
-    temp < -459
-  when 'celsius'
-    temp < -273
-  when 'kelvin'
-    temp < 0
-  end
-end
-
 
 if __FILE__ == $PROGRAM_NAME
   puts 'Temperature Converter'
@@ -116,7 +114,7 @@ if __FILE__ == $PROGRAM_NAME
   valid     = [unit_from, unit_to].all? {|u| valid?(u) }
 
   if valid
-    puts "%.2f degrees #{unit_from.capitalize} is %.2f degrees #{unit_to.capitalize}" % [temp.to_f,convert(unit_from, unit_to, temp.to_f)]
+    puts "%.2f degrees #{unit_from.capitalize} is %.2f degrees #{unit_to.capitalize}" % [temp.to_f, convert(unit_from, unit_to, temp.to_f)]
   else
     puts 'Sorry, that is not a valid input. Maybe check your spelling.'
   end
