@@ -16,11 +16,11 @@ end
 
 =begin
     doctest: returns a multiplication table for n with a space in the first column
+    # testing edge case
     >> @table = ''
     >> build_the_table(0)
     => " 0\n"
-    >> build_the_table(1)
-    => " 1\n"
+    >> @table = ''
     >> build_the_table(2)
     => " 1 2\n 2 4\n"
 =end
@@ -39,6 +39,7 @@ def build_the_table n
        @table << "\n"
      end
    end
+   @table                      # not sure why this is necessary but test fails without it
 end
 
 =begin
