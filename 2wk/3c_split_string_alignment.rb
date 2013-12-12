@@ -19,9 +19,9 @@
         Line 11: k
         "
 =end
-def linify_with_alignment string
-  string.each_line.with_index(1).map do |line, i|
-    'Line ' + sprintf('%*s: ', last_line_number_length(string), i) + line
+def linify_with_alignment text
+  text.each_line.with_index(1).map do |line, i|
+    sprintf("Line %*s: #{line}", last_line_number_length(text), i)
   end.join
 end
 
@@ -34,8 +34,8 @@ end
     >> last_line_number_length(s)
     => 2 
 =end
-def last_line_number_length string
-  string.lines.count.to_s.length
+def last_line_number_length line
+  line.lines.count.to_s.length
 end
 
 s = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
