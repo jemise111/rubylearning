@@ -21,8 +21,21 @@
 =end
 def linify_with_alignment string
   string.each_line.with_index(1).map do |line, i|
-    'Line ' + sprintf('%*s: ', string.lines.count.to_s.length, i) + line
+    'Line ' + sprintf('%*s: ', last_line_number_length(string), i) + line
   end.join
+end
+
+=begin
+    doctest: return length of last line number
+    >> s = "a\nb\nc"
+    >> last_line_number_length(s)
+    => 1
+    >> s = "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\n"
+    >> last_line_number_length(s)
+    => 2 
+=end
+def last_line_number_length string
+  string.lines.count.to_s.length
 end
 
 s = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
