@@ -34,8 +34,8 @@ end
     >> last_line_number_length(s)
     => 2 
 =end
-def last_line_number_length line
-  line.lines.count.to_s.length
+def last_line_number_length text
+  text.lines.count.to_s.length
 end
 
 s = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
