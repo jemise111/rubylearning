@@ -8,7 +8,8 @@
     # if user types 'hello' (not sure if this is appropriate test)
     => 'hello'
 =end
-def prompt question
-  puts question
+def prompt question, spacer = 0
+  print question
+  spacer.times { puts }
   gets.chomp
 end
