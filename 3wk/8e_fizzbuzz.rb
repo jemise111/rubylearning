@@ -3,7 +3,8 @@
 # multiples of 5
 
 =begin
-    doctest: return fizzbuzz string for integer
+    doctest: return 'Fizz' for multiples of 3, 'Buzz' for multiples of 5,
+    'FizzBuzz' when both cases true
     >> fizzbuzz(3)
     => 'Fizz'
     >> fizzbuzz(5)
