@@ -34,10 +34,10 @@ def granny_response say_to_granny
 end
 
 if __FILE__ == $PROGRAM_NAME
-  loop do
+  say_to_granny = ''
+  until say_to_granny == 'BYE'    # should use conditional assignment here
     puts 'What would you like to say to deaf granny?'
     say_to_granny = gets.chomp
-    break if say_to_granny == 'BYE'
     puts granny_response(say_to_granny)
   end
 end
