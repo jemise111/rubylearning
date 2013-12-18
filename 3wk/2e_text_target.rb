@@ -21,14 +21,13 @@ end
 
 =begin
     doctest: open a file and return manipulated lines as string
-    >> file = '2e_text.txt'
+    >> file = 'text.txt'
     >> file_lines_to_array(file)
-    => "
-        text text text text text\n
-        text text text text text\n
-        text text insert word text text\n
-        text text text text text\n
-        text text text text text\n
+    => "text text text text text
+        text text text text text
+        text text insert word text text
+        text text text text text
+        text text text text text
         "
 =end
 def file_lines_to_array file
