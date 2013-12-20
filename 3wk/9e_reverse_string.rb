@@ -16,7 +16,7 @@ def reverse_word_order string
 end
 
 if __FILE__ == $PROGRAM_NAME
-  test_string = "This is a test string.\nThis line should be returned first."
+  test_string = "This is a test string."
   puts reverse_word_order(test_string)
 end
 
