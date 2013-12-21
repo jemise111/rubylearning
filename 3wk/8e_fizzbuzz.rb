@@ -3,22 +3,28 @@
 # multiples of 5
 
 =begin
-    doctest: return 'Fizz' for multiples of 3, 'Buzz' for multiples of 5,
-    'FizzBuzz' when both cases true
+    doctest: return 'Fizz' for multiples of 3, 'Buzz' for 5, 'Dazz'
+    for 7, 'Kezz' for 11, integer otherwise
     >> fizzbuzz(3)
     => 'Fizz'
     >> fizzbuzz(5)
     => 'Buzz'
     >> fizzbuzz(15)
     => 'FizzBuzz'
+    >> fizzbuzz(21)
+    => 'FizzDazz'
+    >> fizzbuzz(77)
+    => 'DazzKezz'
+    >> fizzbuzz(2)
+    => 2
 =end
 def fizzbuzz integer
   result = ''
-  result << 'Fizz' if integer % 3 == 0
-  result << 'Buzz' if integer % 5 == 0 
-  result
+  fizzbuzz = { 3 => 'Fizz', 5 => 'Buzz', 7 => 'Dazz', 11 => 'Kezz' }
+  fizzbuzz.each { |k, v| result << v if integer % k == 0 }
+  result.length == 0 ? integer : result
 end
 
-1.upto(100) do |n|
-  puts "#{n % 3 == 0 || n % 5 == 0 ? fizzbuzz(n) : n}"
+if __FILE__ == $PROGRAM_NAME
+  1.upto(100) { |n| puts fizzbuzz(n) }
 end
