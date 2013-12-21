@@ -11,9 +11,7 @@
     => 98.5
 =end
 def sum_elements array_of_numbers
-  result = 0
-  array_of_numbers.each { |n| result += n }
-  result
+  array_of_numbers.reduce(:+)
 end
 
 if __FILE__ == $PROGRAM_NAME
