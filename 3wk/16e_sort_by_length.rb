@@ -17,7 +17,7 @@
     >> a.sort_by { |s| s }
     doctest: sort passing block with one argument will throw an error
     >> a = ['bbb', 'a', 'cc']
-    >> a.sort { |s| s }
-    => ['a', 'bbb', 'cc']
+    >> begin ; a.sort { |s| s } ; rescue => e ; e.class ; end
+    => ArgumentError
 =end
 
