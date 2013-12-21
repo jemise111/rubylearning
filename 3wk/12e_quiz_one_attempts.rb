@@ -9,9 +9,7 @@
     => 3
 =end
 def number_of_zeros quiz_array
-  result = 0
-  quiz_array.each { |n| result += 1 if n == 0 }
-  result
+  quiz_array.count(0)
 end
 
 if __FILE__ == $PROGRAM_NAME
