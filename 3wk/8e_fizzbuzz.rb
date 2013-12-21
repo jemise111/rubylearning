@@ -1,6 +1,7 @@
 # 8e_fizzbuzz.rb
-# Print 1-100 substitution 'Fizz' for multiples of 3 and 'Buzz' for
-# multiples of 5
+# Print 1-100 substituting 'Fizz' for multiples of 3, 'Buzz' for
+# multiples of 5, 'Dazz' for multples of 7, 'Kezz' for multiples
+# of 11.
 
 =begin
     doctest: return 'Fizz' for multiples of 3, 'Buzz' for 5, 'Dazz'
