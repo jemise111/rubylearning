@@ -18,6 +18,8 @@
     => 'DazzKezz'
     >> fizzbuzz(2)
     => 2
+    >> fizzbuzz(15, 3 => 'Razz', 5 => 'Fuzz')
+    => 'RazzFuzz'
 =end
 def fizzbuzz integer, rules = {}
   result = ''
