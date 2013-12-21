@@ -10,7 +10,7 @@
     => 'odd'
 =end
 def odd_or_even integer
-  integer % 2 == 0 ? 'even' : 'odd'
+  integer.even? ? 'even' : 'odd'
 end
 
 if __FILE__ == $PROGRAM_NAME
