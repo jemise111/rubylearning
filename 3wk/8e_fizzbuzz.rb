@@ -26,7 +26,7 @@ def fizzbuzz integer, rules = {}
   default_rules = { 3 => 'Fizz', 5 => 'Buzz' }
   fizzbuzz = default_rules.merge rules
   fizzbuzz.each { |k, v| result << v if (integer % k).zero? }
-  result.length == 0 ? integer : result
+  result.empty? ? integer : result
 end
 
 if __FILE__ == $PROGRAM_NAME
