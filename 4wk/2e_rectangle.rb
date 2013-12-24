@@ -1,0 +1,31 @@
+# 2e_rectangle.rb
+# Write a rectangle class with methods for area, perimeter calculation.
+
+=begin
+    doctest: return area of rectangle rounded to 2 decimal places
+    >> r = Rectangle.new(4.55, 1.55)
+    >> r.area
+    => 7.05
+    doctest: return perimter of rectangle rounded to 2 decimal places
+    >> r = Rectangle.new(2, 3.044)
+    >> r.perimeter
+    => 10.09
+=end
+class Rectangle
+  def initialize(length, width)
+    @length = length
+    @width = width
+  end
+
+  def area
+    (@length * @width).round(2)
+  end
+
+  def perimeter
+    (2 * @length + 2 * @width).round(2)
+  end
+end
+
+r = Rectangle.new(23.45, 34.67)
+puts "Area is = #{r.area}"
+puts "Perimeter is = #{r.perimeter}"
