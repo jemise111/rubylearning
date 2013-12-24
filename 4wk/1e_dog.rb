@@ -35,12 +35,13 @@ class Dog
     @hunger_level = 0
   end
 end
-
-leo = Dog.new('Leo')
-leo.bark
-leo.chase_cat
-leo.eat
-4.times { leo.bark }
-leo.chase_cat
-leo.eat
-leo.chase_cat
+if __FILE__ == $PROGRAM_NAME
+  leo = Dog.new('Leo')
+  leo.bark
+  leo.chase_cat
+  leo.eat
+  4.times { leo.bark }
+  leo.chase_cat
+  leo.eat
+  leo.chase_cat
+end
