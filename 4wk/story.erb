@@ -1,0 +1,10 @@
+<%
+  require './4wk/1e_dog'
+  leo = Dog.new('Leo')
+%>
+Once upon a time there was a family that had a dog.  This dogs name was <%= name = leo.instance_variable_get(:@name) %>  His bite was not quite as bad as his bark.  There he goes now! "<%= leo.bark %>".
+
+Would you like to come with me while I feed <%= name %>?  "Here you go <%= name %>.".
+
+<%= name %> goes to his bowl: <%= leo.eat %>.
+
