@@ -5,11 +5,11 @@
     doctest: return area of rectangle rounded to 2 decimal places
     >> r = Rectangle.new(4.55, 1.55)
     >> r.area
-    => 7.05
+    => 7.0525
     doctest: return perimter of rectangle rounded to 2 decimal places
-    >> r = Rectangle.new(2, 3.044)
+    >> r = Rectangle.new(3.25, 4.85)
     >> r.perimeter
-    => 10.09
+    => 16.2
 =end
 class Rectangle
   def initialize(length, width)
@@ -18,14 +18,16 @@ class Rectangle
   end
 
   def area
-    (@length * @width).round(2)
+    @length * @width
   end
 
   def perimeter
-    (2 * @length + 2 * @width).round(2)
+    2 * @length + 2 * @width
   end
 end
 
-r = Rectangle.new(23.45, 34.67)
-puts "Area is = #{r.area}"
-puts "Perimeter is = #{r.perimeter}"
+if __FILE__ == $PROGRAM_NAME
+  r = Rectangle.new(23.45, 34.67)
+  puts "Area is = #{r.area.round(2)}"
+  puts "Perimeter is = #{r.perimeter.round(2)}"
+end
