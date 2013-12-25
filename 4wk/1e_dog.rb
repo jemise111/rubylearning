@@ -37,12 +37,12 @@ class Dog
 end
 
 if __FILE__ == $PROGRAM_NAME
-  leo = Dog.new('Leo')
-  leo.bark
-  leo.chase_cat
-  leo.eat
-  4.times { leo.bark }
-  leo.chase_cat
-  leo.eat
-  leo.chase_cat
+  puts leo = Dog.new('Leo')
+  puts leo.bark
+  puts leo.chase_cat
+  puts leo.eat
+  puts 4.times { leo.bark }
+  puts leo.chase_cat
+  puts leo.eat
+  puts leo.chase_cat
 end
