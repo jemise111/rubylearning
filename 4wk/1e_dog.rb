@@ -30,10 +30,10 @@ class Dog
     end
   end
 
-# make this private
-  def hungry?
-    @hunger_level > 3
-  end
+  private
+    def hungry?
+      @hunger_level > 3
+    end
 end
 
 if __FILE__ == $PROGRAM_NAME
@@ -41,7 +41,7 @@ if __FILE__ == $PROGRAM_NAME
   puts leo.bark
   puts leo.chase_cat
   puts leo.eat
-  puts 4.times { leo.bark }
+  4.times { puts leo.bark }
   puts leo.chase_cat
   puts leo.eat
   puts leo.chase_cat
