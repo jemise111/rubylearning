@@ -8,33 +8,34 @@ class Dog
   end
 
   def bark
-    puts 'RUFF RUFF!'
     @hunger_level += 1
-  end
-
-  def hungry?
-    @hunger_level > 3
+    'RUFF RUFF!'
   end
 
   def chase_cat
     if !hungry?
-      puts "#{@name} sees a cat and chases it! Good thing he's a friendly dog."
       @hunger_level += 1
+      "#{@name} sees a cat and chases it! Good thing he's a friendly dog."
     else
-      puts "#{@name} sees a cat but doesn't have the energy to chase it. He"
-      puts 'could use some food.'
+      "#{@name} sees a cat but doesn't have the energy to chase it. He could use some food."
     end
   end
 
   def eat
-    if hungry?
-      puts "#{@name} chomps away. Boy was he hungry."
-    else
-      puts "#{@name} snacks a bit. He leaves some food left over."
-    end
     @hunger_level = 0
+    if hungry?
+      "#{@name} chomps away. Boy was he hungry."
+    else
+      "#{@name} snacks a bit. He leaves some food left over."
+    end
+  end
+
+# make this private
+  def hungry?
+    @hunger_level > 3
   end
 end
+
 if __FILE__ == $PROGRAM_NAME
   leo = Dog.new('Leo')
   leo.bark
