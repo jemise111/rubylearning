@@ -3,37 +3,28 @@
 # minutes in a leap year and a non leap year.
 
 =begin
+doctest: setup
+>> leap_year_with_error_raise = ->(year){ begin ; leap_year?(year) ; rescue => e ; e.class ; end }
 doctest: return true if a year is a leap year
->> [-400, -1896, -2000, 400, 1896, 2000].map { |y| leap_year?(y) }.all?
+>> [-400, -1896, -2000, 400, 1896, 2000].map {|year| leap_year?(year) }.all?
 => true
 doctest: return false if a year is not a leap year
 >> [-300, -1900, -2001, 300, 1900, 2001].map { |y| leap_year?(y) }.all?
 => false
-doctest: return error string if year is 0
->> leap_year?(0)
-=> 'error'
+doctest: raise an error if year is 0
+>> leap_year_with_error_raise[0]
+=> RuntimeError
 =end
 def leap_year? year
-  unless year == 0
-    if year % 4 == 0
-      year % 100 == 0 ? year % 400 == 0 : true
-    end
-  else
-    'error'
-  end
+  year.zero? && fail("Invalid Year 0")
+  year % 400 == 0 || year % 4 == 0 && year % 100 != 0
 end
 
-MINUTES_IN_A_STANDARD_YEAR =      60 * 24 * 365
-MINUTES_IN_A_LEAP_YEAR     =      60 * 24 * 366
-print "Please enter a valid year: "
-loop do
-  year = gets.to_i
-  if leap_year?(year) == 'error'
-    puts 'Numeric characters only please. Remember 0 is not a year.'
-    print 'Please try again: '
-  else
-    minutes = leap_year?(year) ? MINUTES_IN_A_LEAP_YEAR : MINUTES_IN_A_STANDARD_YEAR
-    puts "There are #{minutes} minutes in the year #{year}."
-    break
-  end
+if __FILE__ == $PROGRAM_NAME
+  MINUTES_IN_A_STANDARD_YEAR = 60 * 24 * 365
+  MINUTES_IN_A_LEAP_YEAR     = 60 * 24 * 366
+  print "Please enter a valid year: "
+  year = gets.to_i until year && !year.zero? && year.is_a?(Numeric) && puts("Try again")
+  minutes = leap_year?(year) ? MINUTES_IN_A_LEAP_YEAR : MINUTES_IN_A_STANDARD_YEAR
+  puts "There are #{minutes} minutes in the year #{year}."
 end
