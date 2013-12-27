@@ -2,57 +2,50 @@
 # Write a deaf granny program according to the given guidelines
 
 # this looks ugly but require_relative caused failing tests
-require "#{Dir.pwd}/../2wk/1c_prompt.rb"
 
-=begin
-    doctest: return true if string is all uppercase, false otherwise
-    >> ['HI', 'HI!',
-        'HI GRANNY', 'HI GRANNY 4!'
-        ].map { |s| shouted?(s) }.all?
-    => true
-    >> ['Hi', 'Hi!',
-        'HI GRaNNY', 'Hi GRANNY 4!'
-        ].map { |s| shouted?(s) }.all?
-    => false
-=end
-def shouted?(string)
-  string == string.upcase
-end
+class Granny
 
-=begin
-    doctest: if shouted returns granny exclamation, otherwise
-             told to speak up
-    >> granny_response('Hi')
-    => 'HUH?! SPEAK UP, SONNY!'
-    # use seed here for testing
-    >> granny_response('HI')
-    => "NO, NOT SINCE 1950!"
-=end
-def granny_response(say_to_granny)
-  if shouted?(say_to_granny)
-    "NO, NOT SINCE #{1930 + rand(20)}!"
-  else
-    'HUH?! SPEAK UP, SONNY!'
+  def initialize(name = 'Lilly', deafness = 3, years_remembered = (1930..1950))
+    @bye_counter = 0
+    @years_remembered = *years_remembered # splat mekes my range an array
+    @name = name
+    @deafness = deafness
   end
-end
 
-=begin
-    doctest: return false if doesn't receive n consecutive 'BYE's
-    >> @bye_counter = 0
-    >> ['BYE', 'Hi', 'BYE',
-        'BYE', 'BYE'].map { |s| consecutive_bye(3, s) }
-    => [false, false, false, false, true]
-=end
-def consecutive_bye(n, string)
-  string == 'BYE' ? @bye_counter += 1 : @bye_counter = 0
-  @bye_counter >= n
+  def response(say_to_granny)
+    return if say_to_granny.empty?
+    if heard?(say_to_granny)
+      "NO, NOT SINCE #{@years_remembered.sample}!"
+    else
+      'HUH?! SPEAK UP, SONNY!'
+    end unless done?(say_to_granny) || say_to_granny == 'BYE' 
+  end
+
+  def done?(string=nil)
+    if string
+      string == 'BYE' ? @bye_counter += 1 : @bye_counter = 0
+    end
+    @bye_counter >= @deafness
+  end
+
+  def greeting
+    "Hello Sonny!  Please do speak loudly, Granny #{@name}'s durablecells have died."
+  end
+
+  private
+
+  def heard?(string)
+    string == string.upcase
+  end
+
 end
 
 if __FILE__ == $PROGRAM_NAME
-  puts 'Hello Sonny!  Please do speak loudly, my durablecells have died.'
-  @bye_counter = 0
-  question = 'What would you like to say to deaf granny?'
-  until consecutive_bye(3, say_to_granny = prompt(question, 1))
-    puts granny_response(say_to_granny)
+  require './2wk/1c_prompt.rb'
+  granny = Granny.new
+  puts granny.greeting
+  until granny.done?
+    puts granny.response(prompt('Say something '))
   end
 end
+
