@@ -4,17 +4,17 @@
 class Dog
   def initialize(name)
     @name = name
-    @hunger_level = 0
+    reset_hunger
   end
 
   def bark
-    @hunger_level += 1
+    increment_hunger
     'RUFF RUFF!'
   end
 
   def chase_cat
     if !hungry?
-      @hunger_level += 1
+      increment_hunger
       "#{@name} sees a cat and chases it! Good thing he's a friendly dog."
     else
       "#{@name} sees a cat but doesn't have the energy to chase it. He could use some food."
@@ -22,18 +22,27 @@ class Dog
   end
 
   def eat
-    @hunger_level = 0
-    if hungry?
-      "#{@name} chomps away. Boy was he hungry."
-    else
-      "#{@name} snacks a bit. He leaves some food left over."
-    end
+    answer = if hungry?
+               "#{@name} chomps away. Boy was he hungry."
+             else
+               "#{@name} snacks a bit. He leaves some food left over."
+             end
+    reset_hunger && answer
   end
 
   private
-    def hungry?
-      @hunger_level > 3
-    end
+
+  def hungry?
+    @hunger_level > 3
+  end
+
+  def reset_hunger
+    @hunger_level = 0
+  end
+
+  def increment_hunger
+    @hunger_level += 1
+  end
 end
 
 if __FILE__ == $PROGRAM_NAME
