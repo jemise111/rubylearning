@@ -13,11 +13,11 @@ class Dog
   end
 
   def chase_cat
-    if !hungry?
+    if hungry?
+      "#{@name} sees a cat but doesn't have the energy to chase it. He could use some food."
+    else
       increment_hunger
       "#{@name} sees a cat and chases it! Good thing he's a friendly dog."
-    else
-      "#{@name} sees a cat but doesn't have the energy to chase it. He could use some food."
     end
   end
 
