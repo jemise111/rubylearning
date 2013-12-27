@@ -1,6 +1,8 @@
 # p028swapcontents
 # Take two text files and swap their contents
 
+require_relative '../2wk/1c_prompt'
+
 def copy_contents(file_name_a, file_name_b)
   file_a = File.open(file_name_a, 'r')
   file_b = File.open(file_name_b, 'w')
@@ -18,10 +20,17 @@ def swap_contents(file_name_a, file_name_b)
   File.delete('temp')
 end
 
+def get_file
+  until file = prompt('Enter a file name: ') and File.exist?(file)
+    puts 'Invalid file choice. Try again.'
+  end
+  file
+end
+
 if __FILE__ == $PROGRAM_NAME
-  print 'File A? '
-  file_name_a = gets.chomp
-  print 'File B? '
-  file_name_b = gets.chomp
+  puts 'File A: '
+  file_name_a = get_file
+  puts 'File B: '
+  file_name_b = get_file
   swap_contents(file_name_a, file_name_b)
 end
