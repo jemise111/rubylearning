@@ -1,5 +1,5 @@
-# 1e_dog.rb
-# Write class Dog, that has name instance variable and 3 given methods.
+# 1c_dog_teach_trick.rb
+# Write method teach_trick that allows user to teach a trick to an instance of dog.
 
 class Dog
   def initialize(name)
@@ -8,7 +8,7 @@ class Dog
   end
 
   def teach_trick(method_name)
-    self.define_singleton_method(method_name) do
+    define_singleton_method(method_name) do
       yield
     end
   end
