@@ -59,7 +59,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   leo = Dog.new('leo')
-  leo.teach_trick(:say_name) { "My name is #{@name.inspect}" }
+  leo.teach_trick(:say_name) { "My name is #{@name}" }
   puts leo.say_name
   fido = Dog.new('fido')
   puts fido.sit
