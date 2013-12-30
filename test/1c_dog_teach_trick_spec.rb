@@ -8,12 +8,14 @@ describe Dog do
 
   it 'must learn a trick for one instance only' do
     @dog.teach_trick(:dance) { "The dog is dancing!" }
-    @dog.dance.must_match(/dancing/)
-    Dog.new('Leo').dance.must_match(/doesn't know how to/)
+    @dog.must_respond_to(:dance)
+    Dog.new('Leo').wont_respond_to(:dance)
+    Dog.new('Leo').dacne.must_match(/doesn't know how to/)
   end
 
   it 'must learn to say name' do
     @dog.teach_trick(:say_name) { "My name is #{@name}" }
+    @dog.must_respond_to(:say_name)
     @dog.say_name.must_match(/Fido/)
   end
 end
