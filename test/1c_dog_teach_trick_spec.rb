@@ -10,7 +10,7 @@ describe Dog do
     @dog.teach_trick(:dance) { "The dog is dancing!" }
     @dog.must_respond_to(:dance)
     Dog.new('Leo').wont_respond_to(:dance)
-    Dog.new('Leo').dacne.must_match(/doesn't know how to/)
+    Dog.new('Leo').dance.must_match(/doesn't know how to/)
   end
 
   it 'must learn to say name' do
