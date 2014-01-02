@@ -8,12 +8,12 @@ class Playfair
 
   def table_ready_key
     result = key.upcase.squeeze.gsub(/[^A-Z]/, '')
-    result.gsub('J','I').split(//).uniq
+    result.gsub('J', 'I').split(//).uniq
   end
 
   def table_alphabet
     result = table_ready_key
-    for i in 'A'..'Z'
+    ('A'..'Z').each do |i|
       result.push(i) unless i == 'J' || result.include?(i)
     end
     result
