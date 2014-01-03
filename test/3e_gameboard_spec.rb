@@ -17,29 +17,16 @@ describe GameBoard do
     # how to test what is puts'ed
   end
 
-  it 'must recognize invalid input' do
-    @gb.invalid_input?(3).must_be_nil
-    @gb.invalid_input?('h').must_equal(0)
-    # broken test
-    # @gb.invalid_input?(8).must_equal(0)
-    @gb.invalid_input?(20).must_equal(true)
-  end
-
   it 'must return kill string if kill is entered' do
     @gb.set_locations_cells([0, 1, 2])
     @gb.check_yourself('kill').must_equal('kill')
   end
 
-  it 'must return true if game is over' do
+  it 'must return kill string only if game is over' do
     @gb.set_locations_cells([0, 1, 2])
-    @gb.check_yourself(4)
-    @gb.check_yourself(0)
-    @gb.check_yourself(1)
-    @gb.check_yourself(2)
-    @gb.game_over?.must_equal(true)
-  end
-
-  it 'must choose the correct rating' do
-    @gb.choose_rating(3).must_equal('Expert')
+    @gb.check_yourself('4')
+    @gb.check_yourself('0').wont_equal('kill')
+    @gb.check_yourself('1')
+    @gb.check_yourself('2').must_equal('kill')
   end
 end
