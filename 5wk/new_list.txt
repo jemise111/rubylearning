@@ -1,0 +1,3 @@
+foo
+newlist.txt
+oldlist.txt
