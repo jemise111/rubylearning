@@ -11,38 +11,33 @@ class Shape
   end
 
   def click
-    play_sound
-    "#{self.class} rotates clockwise 360 degrees"
+    puts play_sound
+    puts "#{self.class} rotates clockwise 360 degrees"
   end
 
   def play_sound
     "#{sound_file} plays"
   end
+  private
+  def sound_file
+    self.class.to_s.downcase + '.aif'
+  end
 end
 
 class Square < Shape
-  def sound_file
-    'square_sound_file.aif'
-  end
 end
 
 class Circle < Shape
-  def sound_file
-    'circle_sound_file.aif'
-  end
 end
 
 class Triangle < Shape
-  def sound_file
-    'triangle_sound_file.aif'
-  end
 end
 
 if __FILE__ == $PROGRAM_NAME
   s = Square.new(0,0)
   c = Circle.new(0,0)
   t = Triangle.new(0,0)
-  puts s.click
-  puts c.click
-  puts t.click
+  s.click
+  c.click
+  t.click
 end
