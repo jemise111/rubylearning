@@ -23,8 +23,12 @@ describe Playfair do
     @pf.table.must_equal(a)
   end
 
-  it 'must encode message' do
+  it 'must prepare a message for encoding' do
     e = %w[CO NG RE SX SZ SH AL L]
-    @pf.encode_message('Congress shall').must_equal(e)
+    @pf.prepare_for_encoding('Congress shall').must_equal(e)
+    e = %w[BA SE BA LX L]
+    @pf.prepare_for_encoding('Baseball').must_equal(e)
+    e = %w[EX IT EX TR A]
+    @pf.prepare_for_encoding('Exit extra').must_equal(e)
   end
 end

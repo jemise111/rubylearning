@@ -26,14 +26,14 @@ class Playfair
     end
   end
 
-  def encode_message(message)
-    char_array = message.upcase.gsub(/J/,'I').delete(' ').scan(/.{1,2}/)
-    result = char_array
-    (0..char_array.size-1).each do |i|
+  def prepare_for_encoding(message)
+    digraph_array = message.upcase.gsub(/J/, 'I').delete(' ').scan(/.{1,2}/)
+    result = digraph_array
+    (0..digraph_array.size - 1).each do |i|
       if result[i][1].nil? # check for end of array
       else
         if result[i][0] == result[i][1]
-          replace_char = result[i-1].include?('X') ? 'Z' : 'X'
+          replace_char = result[i - 1].include?('X') ? 'Z' : 'X'
           result[i].insert(1, replace_char)
           result = result.join.scan(/.{1,2}/)
         end
@@ -49,5 +49,5 @@ if __FILE__ == $PROGRAM_NAME
     puts pf.table[i].join(' ')
   end
   puts
-  puts pf.encode_message('Hide the gold in the tree stump').join(' ')
+  puts pf.prepare_for_encoding('Hide the gold in the tree stump').join(' ')
 end
