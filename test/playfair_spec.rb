@@ -16,10 +16,15 @@ describe Playfair do
 
   it 'must create a table' do
     a = [%w[P L A Y F],
-         %w[I R E X M], 
-         %w[B C D G H], 
-         %w[K N O Q S], 
+         %w[I R E X M],
+         %w[B C D G H],
+         %w[K N O Q S],
          %w[T U V W Z]]
     @pf.table.must_equal(a)
+  end
+
+  it 'must encode message' do
+    e = %w[CO NG RE SX SZ SH AL L]
+    @pf.encode_message('Congress shall').must_equal(e)
   end
 end
