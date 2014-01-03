@@ -29,6 +29,6 @@ while is_alive
   no_of_guesses += 1
   if (result == 'kill')
     is_alive = false
-    puts "You took #{gb.user_guesses.size} guesses"
+    puts "You took #{no_of_guesses} guesses"
   end
 end
