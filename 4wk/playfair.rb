@@ -39,6 +39,7 @@ class Playfair
         end
       end
     end
+    result[result.size - 1] << 'X' if result[result.size - 1].length.odd?
     result
   end
 end

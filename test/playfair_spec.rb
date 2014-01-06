@@ -24,11 +24,11 @@ describe Playfair do
   end
 
   it 'must prepare a message for encoding' do
-    e = %w[CO NG RE SX SZ SH AL L]
+    e = %w[CO NG RE SX SZ SH AL LX]
     @pf.prepare_for_encoding('Congress shall').must_equal(e)
-    e = %w[BA SE BA LX L]
-    @pf.prepare_for_encoding('Baseball').must_equal(e)
-    e = %w[EX IT EX TR A]
+    e = %w[EX IT EX TR AX]
     @pf.prepare_for_encoding('Exit extra').must_equal(e)
+    e = %w[IA PA NX]
+    @pf.prepare_for_encoding('japan').must_equal(e)
   end
 end
