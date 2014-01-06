@@ -3,21 +3,26 @@ require_relative '../5wk/2e_shapes'
 
 describe Shape do
   before :each do
-    @s = Square.new(2,4)
-    @c = Circle.new(2,4)
-    @t = Triangle.new(2,4)
+    @s = Square.new
+    @c = Circle.new
+    @t = Triangle.new
   end
 
-  it 'must recognize start positions' do
-    @s.x_start.must_equal(2)
-    @t.y_start.must_equal(4)
-  end 
-
-  it 'must rotate when clicked' do
-    @c.click.must_match(/rotates/)
+  it 'must output when clicked' do
+    expected = -> {@s.click}
+    expected.must_output
   end
 
   it 'must play shape-specific sound' do
-    @s.play_sound.must_match(/square_sound_file.aif/)
+    @s.play_sound.must_match(/.aif/)
+  end
+
+  it 'must rotate' do
+     @t.rotate.must_include 'rotate'
+  end
+
+  it 'must raise NotImplemented if rotate is not inplmented' do
+    expected = -> {@t.play_sound}
+    expected.must_raise NotImplemented
   end
 end
