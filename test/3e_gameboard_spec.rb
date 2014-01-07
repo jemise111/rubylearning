@@ -4,26 +4,25 @@ require_relative '../5wk/3e_gameboard'
 describe GameBoard do
   before :each do
     @gb = GameBoard.new
+    @gb.set_locations_cells [0, 1, 2]
   end
 
   it 'must set locations cells' do
-    locations = [3, 4, 5]
-    @gb.set_locations_cells(locations)
-    @gb.instance_variable_get(:@locations).join.must_equal('345')
+    @gb.instance_variable_get(:@locations).join.must_equal('012')
   end
 
   it 'must display appropriate message' do
-    @gb.set_locations_cells([0, 1, 2])
-    # how to test what is puts'ed
+    [
+      [3, "Miss\n"],
+      [2, "Hit\n"],
+      [1, "Hit\n"],
+      [0, "End\n"],
+    ].each do |g, r|
+      -> { @gb.check_yourself(g) }.must_output r
+    end
   end
 
-  it 'must return kill string if kill is entered' do
-    @gb.set_locations_cells([0, 1, 2])
-    @gb.check_yourself('kill').must_equal('kill')
-  end
-
-  it 'must return kill string only if game is over' do
-    @gb.set_locations_cells([0, 1, 2])
+  it 'must return kill string only if all targets are hit' do
     @gb.check_yourself('4')
     @gb.check_yourself('0').wont_equal('kill')
     @gb.check_yourself('1')
