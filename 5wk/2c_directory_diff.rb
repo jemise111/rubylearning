@@ -15,10 +15,10 @@ def difference(old_files, new_files)
 end
 
 if __FILE__ == $PROGRAM_NAME
-  old_dir_contents, new_dir_contents = ARGV
   begin
-    old_files = File.open(old_dir_contents, 'r').readlines
-    new_files = File.open(new_dir_contents, 'r').readlines
+    old_files, new_files = ARGV.map { |f| File.open(f, 'r').readlines }
+    modification_time = ARGV.map { |f| File.mtime(f) }.max
+    puts "Changes since: #{modification_time.strftime("%b-%d-%Y %H:%M:%S %Z")}"
     puts difference(old_files, new_files)
   rescue
     puts 'usage: 2c_directory_diff.rb <old_contents_file> <new_contents_file>'
