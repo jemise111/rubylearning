@@ -22,8 +22,16 @@ describe 'mp3 file' do
   it 'must create a hash containing song information' do
     expected = { title: 'Dancing Shoes',
                  artist: 'Cliff Richard and The Shadows',
-                 album: '(SUMMER HOLIDAY  1963)'
+                 album: '(SUMMER HOLIDAY  1963)',
+                 year: '2000',
+                 comment: "#100%-Free-MP3s(Dalnet) Anni\x00\r",
+                 genre: 24
                }
     song_info(@tag_actual).must_equal(expected)
+  end
+
+  it 'must select the corrext genre' do
+    genre_id = song_info(@tag_actual)[:genre]
+    get_genre(genre_id).must_equal('Soundtrack')
   end
 end
