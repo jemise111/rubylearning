@@ -1,0 +1,21 @@
+# Logfile created on 2014-01-13 12:00:56 -0500 by logger.rb/36483
+I, [2014-01-13T12:00:56.563673 #49322]  INFO -- : File: 3wk/text.txt
+Lines: 121
+Characters: 6268
+Characters Ex Spaces: 5055
+Words: 1093
+Sentences: 45
+Paragraphs: 18
+Words Per Sentence: 24.29
+Sentences Per Paragraph: 2.5
+
+I, [2014-01-13T12:00:56.563940 #49322]  INFO -- : File: 6wk/text2.txt
+Lines: 4
+Characters: 130
+Characters Ex Spaces: 105
+Words: 24
+Sentences: 3
+Paragraphs: 2
+Words Per Sentence: 8.0
+Sentences Per Paragraph: 1.5
+
