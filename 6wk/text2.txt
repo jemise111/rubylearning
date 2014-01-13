@@ -1,0 +1,4 @@
+This file serves as test content for the analyzer program with a logger
+in week 6.
+
+Other than that, this text serves no purpose.
