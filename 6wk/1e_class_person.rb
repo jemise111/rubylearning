@@ -11,5 +11,5 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   jon = Person.new('tightrope-worthy')
-  puts "Jon has #{jon.balance} balance"
+  puts "Jon has #{jon.balance} balance."
 end
