@@ -3,10 +3,10 @@
 # make it readable via an accessor
 
 class Person
+  attr_reader :balance
   def initialize(balance)
     @balance = balance
   end
-  attr_reader :balance
 end
 
 if __FILE__ == $PROGRAM_NAME
