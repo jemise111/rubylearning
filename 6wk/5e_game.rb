@@ -14,16 +14,15 @@ def load_game(file)
   f = File.open(file,'r')
   score, time = f.each_line.map { |line| line.to_i }
   raise 'I suspect you of cheating.' if time != File.mtime(f).to_i
-  puts "Your saved score is #{score}"
-  score
+  "Your saved score is #{score}"
 end
 
 if __FILE__ == $PROGRAM_NAME
   save_game('6wk/game.sav')
   sleep(2)
-  load_game('6wk/game.sav') # => "Your saved score is 1000."
+  puts load_game('6wk/game.sav') # => "Your saved score is 1000."
 
   # Now let's cheat by increasing our score to 9000
   open('6wk/game.sav', 'r+b') { |f| f.write('9') }
-  load_game('6wk/game.sav') # RuntimeError: I suspect you of cheating.
+  puts load_game('6wk/game.sav') # RuntimeError: I suspect you of cheating.
 end

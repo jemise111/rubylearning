@@ -12,7 +12,7 @@ describe 'game' do
     -> { load_game('6wk/test_game.sav') }.must_raise RuntimeError
   end
 
-  it 'must return score when no cheating detected' do
-    load_game('6wk/test_game.sav').must_equal(1000)
+  it 'must return score string when no cheating detected' do
+    load_game('6wk/test_game.sav').must_match(/1000/)
   end
 end
