@@ -18,6 +18,9 @@ class Hash
   end
 end
 
+class UndefinedLevelError < RuntimeError
+end
+
 def analyze file_contents
   file_stats = {}
   file_stats[:lines] = file_contents.lines.size
@@ -34,13 +37,39 @@ def analyze file_contents
   file_stats
 end
 
+def add_to_log message
+  user_level = ARGV[1]
+  choose_level = {
+    fatal: Logger::FATAL,
+    error: Logger::ERROR,
+    warn: Logger::WARN,
+    info: Logger::INFO,
+    debug: Logger::DEBUG
+  }
+  if user_level.nil?
+    $LOG.info(message) # default level
+  elsif choose_level.keys.include?(user_level.to_sym)
+    $LOG.add(choose_level[user_level.to_sym], message)
+  else
+    raise UndefinedLevelError
+  end
+end
+
+def log?
+  ARGV[0] == '-l' || ARGV[0] == '--logger'
+end
+
 if __FILE__ == $PROGRAM_NAME
-  $LOG = Logger.new('logs/3e_analayzer_logger.log')
+  $LOG = Logger.new('logs/3e_analayzer_logger.log') if log?
   file_name = ['3wk/text.txt', '6wk/text2.txt']
-  file_name.each do |f|
-    analysis = "File: #{f}\n#{analyze(IO.read(f)).display}"
-    $LOG.info(analysis)
-    puts analysis
-    puts
+  begin
+    file_name.each do |f|
+      analysis = "File: #{f}\n#{analyze(IO.read(f)).display}"
+      add_to_log(analysis) if log?
+      puts analysis
+      puts
+    end
+  rescue UndefinedLevelError
+    puts 'Please use an accurate logger level'
   end
 end
