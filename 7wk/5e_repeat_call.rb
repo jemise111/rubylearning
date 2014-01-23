@@ -9,6 +9,5 @@ def repeat_call(repetitions, interval)
 end
 
 if __FILE__ == $PROGRAM_NAME
-#  repeat_call(12, 5) { system 'ls' }
-  repeat_call(12, 5)
+  repeat_call(12, 5) { system 'ls' }
 end
