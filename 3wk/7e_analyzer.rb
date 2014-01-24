@@ -32,7 +32,9 @@ def analyze file
   file_stats
 end
 
-file = 'text.txt'
-analyze(file).each do |k, v|
-  puts "#{titleize_symbol(k)}: #{v}"
+if __FILE__ == $PROGRAM_NAME
+  file = 'text.txt'
+  analyze(file).each do |k, v|
+    puts "#{titleize_symbol(k)}: #{v}"
+  end
 end
