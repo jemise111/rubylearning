@@ -13,3 +13,4 @@ if __FILE__ == $PROGRAM_NAME
   m = DTRConvertor.new
   puts m.convert(100.0)
 end
+
